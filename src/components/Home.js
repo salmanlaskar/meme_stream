@@ -18,7 +18,9 @@ export default function Home({ history }) {
       .then((data) => {
         setFlag(!flag);
         setLoading(false);
-        setname("");setCaption("");setUrl("");
+        setname("");
+        setCaption("");
+        setUrl("");
       })
       .catch((e) => {
         setLoading(false);
@@ -102,7 +104,12 @@ export default function Home({ history }) {
           }}
         >
           <p
-            style={{ color: "#ffffff", textAlign: "center", fontSize: "16px",fontFamily:"Roboto" }}
+            style={{
+              color: "#ffffff",
+              textAlign: "center",
+              fontSize: "16px",
+              fontFamily: "Roboto",
+            }}
           >
             Submit Meme
           </p>
@@ -153,18 +160,25 @@ export default function Home({ history }) {
               >
                 {item.caption}
               </p>
-              <div style={{display:'flex',justifyContent:'center',width:'100%'}}>
-              <img
-                src={item.url}
+              <div
                 style={{
-                  width: "340px",
-                  height: "300px",
-                  objectFit: "contain",
-                  marginBottom: "20px",
-                  borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
                 }}
-                alt={index.toString()}
-              /></div>
+              >
+                <img
+                  src={item.url}
+                  style={{
+                    width: "340px",
+                    height: "300px",
+                    objectFit: "contain",
+                    marginBottom: "20px",
+                    borderRadius: "4px",
+                  }}
+                  alt={index.toString()}
+                />
+              </div>
             </div>
           );
         })}

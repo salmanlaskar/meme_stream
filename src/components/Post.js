@@ -5,8 +5,8 @@ export default function Home({ history, match }) {
   const [data, setData] = useState({
     name: "",
     caption: "",
-    url:""
-});
+    url: "",
+  });
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("");
@@ -18,26 +18,30 @@ export default function Home({ history, match }) {
         setData(data1);
         setCaption(data1.caption);
         setUrl(data1.url);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((e) => {
-        setLoading(false)
+        setLoading(false);
         alert("error in data fetching");
       });
-  }, [flag,match.params.id]);
+  }, [flag, match.params.id]);
   const Edit = () => {
     if (!caption || !url) {
-        return alert("Feilds are empty");
-      }
-      setLoading(true)
-    axios({ url: "/memes/"+ match.params.id, method: "PATCH",data:{caption,url} })
+      return alert("Feilds are empty");
+    }
+    setLoading(true);
+    axios({
+      url: "/memes/" + match.params.id,
+      method: "PATCH",
+      data: { caption, url },
+    })
       .then((res) => res.data)
       .then((data1) => {
         setFlag(!flag);
         setLoading(false);
       })
       .catch((e) => {
-        setLoading(false)
+        setLoading(false);
         alert("error in edit meme");
       });
   };
@@ -52,7 +56,7 @@ export default function Home({ history, match }) {
             width: "400px",
             boxShadow: "0 3px 3px 0 rgba(0, 0, 0, 0.38)",
             backgroundColor: "#fafafa",
-            display: data.url?"flex":"none",
+            display: data.url ? "flex" : "none",
             flexDirection: "column",
           }}
         >
@@ -68,17 +72,21 @@ export default function Home({ history, match }) {
           >
             {data.caption}
           </p>
-          <img
-            src={data.url}
-            style={{
-              width: "400px",
-              height: "300px",
-              objectFit: "contain",
-              marginBottom: "20px",
-              borderRadius: "4px",
-            }}
-            alt="memeimage"
-          />
+          <div
+            style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          >
+            <img
+              src={data.url}
+              style={{
+                width: "340px",
+                height: "300px",
+                objectFit: "contain",
+                marginBottom: "20px",
+                borderRadius: "4px",
+              }}
+              alt="memeimage"
+            />
+          </div>
         </div>
         {loading && (
           <div
@@ -136,7 +144,9 @@ export default function Home({ history, match }) {
             borderRadius: "4px",
             boxShadow: "0 3px 3px 0 rgba(0, 0, 0, 0.38)",
           }}
-          onClick={() => {Edit()}}
+          onClick={() => {
+            Edit();
+          }}
         >
           <p
             className="BC_Rectangle1_View"
